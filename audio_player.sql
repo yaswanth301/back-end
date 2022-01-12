@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2022 at 06:29 PM
+-- Generation Time: Jan 12, 2022 at 08:38 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.12
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,11 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_audios` ()  SELECT * from music$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `removeAllAudios` ()  BEGIN
+TRUNCATE `music`;
+SELECT "files removed successfully" as Msg;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -52,14 +57,6 @@ CREATE TABLE `music` (
   `thumbnail` varchar(200) NOT NULL,
   `gender` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `music`
---
-
-INSERT INTO `music` (`id`, `title`, `artist_name`, `audio_url`, `thumbnail`, `gender`) VALUES
-(1, 'policodu', 'unknown', '/audio/Policeodu.mp3', '/thumbnail/policeodu.jpg', 'male'),
-(2, 'policodu', 'unknown', '/audio/Policeodu.mp3', '/thumbnail/policeodu.jpg', 'male');
 
 --
 -- Indexes for dumped tables
@@ -79,7 +76,7 @@ ALTER TABLE `music`
 -- AUTO_INCREMENT for table `music`
 --
 ALTER TABLE `music`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
